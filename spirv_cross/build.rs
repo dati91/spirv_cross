@@ -33,6 +33,17 @@ fn main() {
         eprintln!("Couldn't write to file: {}", e);
     }
 
+    println!("{}", &format!("{}/../../../../../toolkit/library/gtest/XUL.list", od));
+    let mut xul = OpenOptions::new()
+        .write(true)
+        .append(true)
+        .open(&format!("{}/../../../../../toolkit/library/gtest/XUL.list", od))
+        .unwrap();
+
+    if let Err(e) = writeln!(xul, "\n{}/src/vendor/SPIRV-Cross/spirv_cross.o", od) {
+        eprintln!("Couldn't write to file: {}", e);
+    }
+
     build
         .file("src/wrapper.cpp")
         .file("src/vendor/SPIRV-Cross/spirv_cfg.cpp")
